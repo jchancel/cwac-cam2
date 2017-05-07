@@ -1,0 +1,9 @@
+/build
+/cam2-support
+/demo
+/demo-playground
+/docs
+/cam2/build
+/.idea
+/.gradle
+local.properties
