@@ -31,6 +31,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
+
 import com.commonsware.cwac.cam2.util.Utils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -49,7 +51,7 @@ import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
  * Base class for activities that integrate with CameraFragment
  * for taking pictures or recording video.
  */
-abstract public class AbstractCameraActivity extends Activity {
+abstract public class AbstractCameraActivity extends DimScreenActivity {
   /**
    * List<FlashMode> indicating the desired flash modes,
    * or null for always taking the default. These are
@@ -228,6 +230,9 @@ abstract public class AbstractCameraActivity extends Activity {
       (OrientationLockMode)getIntent().getSerializableExtra(EXTRA_ORIENTATION_LOCK_MODE);
 
     lockOrientation(olockMode);
+
+    //jdeation: try and keep screen from going to sleep
+    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
     if (needsOverlay()) {
       getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);

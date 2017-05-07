@@ -73,6 +73,10 @@ public class CameraFragment extends Fragment
   private CameraController ctlr;
   private ViewGroup previewStack;
   private FloatingActionButton fabPicture;
+
+  //JASON Add
+  private FloatingActionButton fabCancel;
+
   private FloatingActionButton fabSwitch;
   private View progress;
   private boolean isVideoRecording=false;
@@ -253,10 +257,25 @@ public class CameraFragment extends Fragment
     View v=
       inflater.inflate(R.layout.cwac_cam2_fragment, container, false);
 
+
+
+
     previewStack=
       (ViewGroup)v.findViewById(R.id.cwac_cam2_preview_stack);
 
+
+
     progress=v.findViewById(R.id.cwac_cam2_progress);
+
+
+    fabCancel = (FloatingActionButton)v.findViewById(R.id.cwac_cam2_cancel_camera);
+    fabCancel.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        getActivity().onBackPressed();
+      }
+    });
+
     fabPicture=
       (FloatingActionButton)v.findViewById(R.id.cwac_cam2_picture);
     reverseChronometer=
@@ -293,9 +312,9 @@ public class CameraFragment extends Fragment
       }
     });
 
-    changeMenuIconAnimation(
+   /* changeMenuIconAnimation(
       (FloatingActionMenu)v.findViewById(R.id.cwac_cam2_settings));
-
+*/
     onHiddenChanged(false); // hack, since this does not get
     // called on initial display
 
